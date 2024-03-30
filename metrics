@@ -1,0 +1,18 @@
+Based on this metrics as an example, that are stored in the prometheus! I want a python code script code using anthropic, that will have a as a request a human readable text like "what is status of this namespace" and this text is going to be translated by claude into a prometheus query
+or promql, which will be executed against prometheus api, and the response from the query  will be validated by claude and return a human readable response based on the first request.
+pods{namespace="default", phase="Running"}: 32
+pods{namespace="default", phase="Pending"}: 5
+pods{namespace="kube-system", phase="Running"}: 18
+pods{namespace="kube-system", phase="Pending"}: 3
+nodes{region="us-west", zone="us-west-1"}: 3
+deployments{namespace="default"}: 7
+replica_sets{namespace="default", owner="deployment", deployment="nginx-deployment"}: 3
+replica_sets{namespace="default", owner="deployment", deployment="backend-deployment"}: 2
+replica_sets{namespace="default", owner="statefulset", statefulset="mysql-statefulset"}: 5
+replica_sets{namespace="kube-system", owner="daemonset", daemonset="kube-proxy"}: 1
+
+
+ContentBlock(text='To check the status of the Prometheus instances, you can use the following PromQL query:\n\n```\nup{job="prometheus"}\n```\n\n
+This query will return the current status of each Prometheus instance that has the job label set to "prometheus". 
+The `up` metric is a special metric in Prometheus that indicates whether the instance is reachable and healthy.\n\n
+The result will be a vector with a value of:\n- `1` if the instance is up', type='text')] what is the status of the prometheus instances?
